@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Artegra Sans';
+    src: local('Artegra Sans Regular'), local('Artegra-Sans-Regular'),
+        url('ArtegraSans-Regular.woff2') format('woff2'),
+        url('ArtegraSans-Regular.woff') format('woff'),
+        url('ArtegraSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
