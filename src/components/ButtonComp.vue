@@ -1,7 +1,7 @@
 <template>
     <div class="button" :style="style">
         <slot></slot>
-        {{ title }}
+        <p v-if="title">{{ title }}</p>
     </div>
 </template>
 

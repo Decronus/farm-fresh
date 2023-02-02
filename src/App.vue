@@ -46,6 +46,20 @@
     box-sizing: border-box;
 }
 
+*::placeholder {
+    font-family: Artegra Sans;
+}
+
+h1,
+h2,
+h3 {
+    text-align: left;
+}
+
+input {
+    font-family: Artegra Sans;
+}
+
 #app {
     font-family: Artegra Sans, Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

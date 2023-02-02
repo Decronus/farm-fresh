@@ -32,6 +32,13 @@ export default {
             default: false,
         },
     },
+    watch: {
+        visibility() {
+            this.visibility
+                ? (document.body.style.overflow = "hidden")
+                : (document.body.style.overflow = "auto");
+        },
+    },
 };
 </script>
 
@@ -53,7 +60,7 @@ export default {
     min-width: 300px;
     min-height: 200px;
     background: #ffffff;
-    padding: 30px;
+    padding: 50px;
     border-radius: 20px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
 }
