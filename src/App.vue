@@ -4,6 +4,7 @@
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&display=swap");
 @font-face {
     font-family: "Artegra Sans";
     src: local("Artegra Sans Regular"), local("Artegra-Sans-Regular"),
@@ -36,7 +37,7 @@
             format("woff"),
         url("fonts/ArtegraSans-SemiBold/ArtegraSans-SemiBold.ttf")
             format("truetype");
-    font-weight: 600;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -47,21 +48,23 @@
 }
 
 *::placeholder {
-    font-family: Artegra Sans;
+    font-family: Fira Sans;
 }
 
 h1,
 h2,
 h3 {
     text-align: left;
+    font-weight: 500;
 }
 
 input {
-    font-family: Artegra Sans;
+    font-family: Fira Sans;
 }
 
 #app {
-    font-family: Artegra Sans, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Fira Sans, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -69,18 +72,5 @@ input {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-nav {
-    padding: 30px;
-}
-
-nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-    color: #42b983;
 }
 </style>

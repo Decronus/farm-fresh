@@ -21,15 +21,25 @@ h1 {
     margin-bottom: 10px;
 }
 
-.category-wrap {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 30px;
+.elem {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-@media (max-width: 1200px) {
+.category-wrap {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.category-wrap::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* @media (max-width: 1200px) {
     h1 {
         text-align: center;
     }
@@ -55,5 +65,5 @@ h1 {
     .category-wrap {
         grid-template-columns: 1fr;
     }
-}
+} */
 </style>

@@ -1,28 +1,33 @@
 <template>
-    <div class="product-card-wrap">
-        <div class="product-card-img"></div>
-        <div class="product-card-details">
-            <div class="details-first-row">
-                <div class="product-name-and-provider">
-                    <p class="product-name">
-                        Клубника свежемороженная летний сорт
-                    </p>
-                    <p class="product-provider">ИП Гедзун А.Н.</p>
-                </div>
-                <div class="discount-label"><p>-28%</p></div>
+    <div class="card-container">
+        <div class="product-card-wrap">
+            <div class="product-card-img-container">
+                <div class="product-card-img"></div>
             </div>
-            <div class="details-second-row">
-                <button-comp
-                    title="+ В корзину"
-                    width="120"
-                    height="36"
-                ></button-comp>
-                <div class="product-prices">
-                    <div class="discount-price">
-                        <p>2250 ₽/кг</p>
+
+            <div class="product-card-details">
+                <div class="details-first-row">
+                    <div class="product-name-and-provider">
+                        <p class="product-name">
+                            Клубника свежемороженная летний сорт
+                        </p>
+                        <p class="product-provider">ИП Гедзун А.Н.</p>
                     </div>
-                    <div class="normal-price">
-                        <p>1890 ₽/кг</p>
+                    <div class="discount-label"><p>-28%</p></div>
+                </div>
+                <div class="details-second-row">
+                    <button-comp
+                        title="+ В корзину"
+                        width="120"
+                        height="36"
+                    ></button-comp>
+                    <div class="product-prices">
+                        <div class="discount-price">
+                            <p>2250 ₽/кг</p>
+                        </div>
+                        <div class="normal-price">
+                            <p>1890 ₽/кг</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,13 +36,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name: "product-card",
+};
 </script>
 
 <style>
 .product-card-wrap {
-    max-width: 900px;
-    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 275px;
+    height: 100%;
     border-radius: 12px;
     font-size: 16px;
     font-weight: 500;
@@ -53,12 +63,16 @@ export default {};
 }
 
 .product-card-details {
-    width: 100%px;
-    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
     border: 1px solid #e8e8e8;
     border-top: none;
     border-radius: 0 0 12px 12px;
     padding: 10px 14px;
+    gap: 10px;
 }
 
 .product-name-and-provider {
@@ -78,6 +92,10 @@ export default {};
     background: #e65823;
     border-radius: 4px;
     flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
 }
 
 .details-first-row {
@@ -91,14 +109,6 @@ export default {};
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.discount-label {
-    padding-top: 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
 }
 
 .product-prices {

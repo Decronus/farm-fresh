@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <category-comp header="Популярные продукты">
+        <category-comp header="Популярные продукты →">
             <product-card></product-card>
             <product-card></product-card>
             <product-card></product-card>
@@ -12,10 +12,7 @@
 </template>
 
 <script>
-import ProductCard from "@/components/ProductCard.vue";
-import CategoryComp from "@/components/CategoryComp.vue";
 export default {
     name: "MainView",
-    components: { ProductCard, CategoryComp },
 };
 </script>

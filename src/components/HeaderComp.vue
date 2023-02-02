@@ -137,6 +137,7 @@ export default {
     align-items: center;
     font-size: 16px;
     gap: 50px;
+    font-weight: 400;
 }
 
 .logo-and-menu-wrap {
