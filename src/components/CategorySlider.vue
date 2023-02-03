@@ -1,18 +1,22 @@
 <template>
-    <div class="header-wrap">
-        <h1>{{ header }} <span>→</span></h1>
-        <div class="controlls">
-            <div class="controlls-back-wrap" ref="refControllsBackWrap" @click="stepBack()">
-                <p>‹</p>
-            </div>
-            <div class="controlls-forw-wrap" ref="refControllsForwWrap" @click="stepForw()">
-                <p>›</p>
+    <div>
+        <div class="header-wrap">
+            <h1>{{ header }} <span>→</span></h1>
+            <div class="controlls">
+                <div class="controlls-back-wrap" ref="refControllsBackWrap" @click="stepBack()">
+                    <p>‹</p>
+                </div>
+                <div class="controlls-forw-wrap" ref="refControllsForwWrap" @click="stepForw()">
+                    <p>›</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
-        <div class="category-wrap" ref="refCategory">
-            <slot></slot>
+        <div>
+            <div class="category-container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
+                <div class="category-wrap" ref="refCategory">
+                    <slot></slot>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -34,6 +38,7 @@ export default {
     },
     methods: {
         mousedownEvent(event) {
+            console.log(event);
             this.$refs.refCategory.style.transition = "none";
             this.isPressedDown = true;
             this.cursorXSpace = event.pageX - this.$refs.refCategory.offsetLeft;
@@ -43,10 +48,12 @@ export default {
             if (!this.isPressedDown) return;
             event.preventDefault();
             this.$refs.refCategory.style.left = `${event.pageX - this.cursorXSpace}px`;
-            this.boundCards();
+            // this.boundCards();
         },
 
         boundCards() {
+            this.$refs.refCategory.style.transition = "all 0.2s ease-in-out";
+
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
             let categoryRect = this.$refs.refCategory.getBoundingClientRect();
 
@@ -64,7 +71,7 @@ export default {
 
         stepBack() {
             this.$refs.refControllsForwWrap.style.opacity = "1";
-            this.$refs.refCategory.style.transition = "all 0.3s";
+            this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
 
             if (+this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth < 0) {
                 this.$refs.refCategory.style.left =
@@ -77,12 +84,10 @@ export default {
 
         stepForw() {
             this.$refs.refControllsBackWrap.style.opacity = "1";
-            this.$refs.refCategory.style.transition = "all 0.3s";
+            this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
 
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
             let categoryRect = this.$refs.refCategory.getBoundingClientRect();
-            console.log("containerRect", categoryRect.right);
-            console.log("categoryRect", containerRect.right);
 
             if (categoryRect.right - this.stepWidth > containerRect.right) {
                 this.$refs.refCategory.style.left =
@@ -103,6 +108,7 @@ export default {
     created() {
         window.addEventListener("mouseup", () => {
             this.isPressedDown = false;
+            this.boundCards();
         });
     },
 
@@ -112,7 +118,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header-wrap {
     display: flex;
     justify-content: space-between;
@@ -157,16 +163,11 @@ h1 span {
     padding-left: 1px;
 }
 
-/* .elem {
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-} */
-
-.container {
+.category-container {
     position: relative;
     max-width: 1160px;
-    overflow-x: hidden;
+    overflow: hidden;
+    min-height: 340px;
 }
 
 .category-wrap {
@@ -177,11 +178,6 @@ h1 span {
     top: 0;
     left: 0;
 }
-
-/* .category-wrap::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-} */
 
 /* @media (max-width: 1200px) {
     h1 {

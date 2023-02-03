@@ -1,18 +1,11 @@
 <template>
     <div class="main">
         <category-slider header="Популярные продукты">
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
-            <product-card></product-card>
+            <product-card v-for="(n, index) in 9" :key="index"></product-card>
+        </category-slider>
+
+        <category-slider header="Специальные предложения">
+            <product-card v-for="(n, index) in 9" :key="index"></product-card>
         </category-slider>
     </div>
 </template>
@@ -22,3 +15,5 @@ export default {
     name: "MainView",
 };
 </script>
+
+<style scoped></style>

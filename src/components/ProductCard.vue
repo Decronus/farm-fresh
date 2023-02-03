@@ -8,7 +8,7 @@
             <div class="product-card-details">
                 <div class="details-first-row">
                     <div class="product-name-and-provider">
-                        <p class="product-name">Клубника свежемороженная летний сорт</p>
+                        <p class="product-name">Лосось с/с</p>
                         <p class="product-provider">от ИП Гедзун А.Н.</p>
                     </div>
                     <div class="discount-label"><p>-28%</p></div>
@@ -19,7 +19,7 @@
                         width="114"
                         height="36"
                         fontSize="14"
-                        borderRadius="100"
+                        borderRadius="100px"
                     ></button-comp>
                     <div class="product-prices">
                         <div class="discount-price">
@@ -52,6 +52,7 @@ export default {
     font-weight: 500;
     text-align: left;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .product-card-img {

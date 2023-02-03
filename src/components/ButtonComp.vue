@@ -41,7 +41,7 @@ export default {
                 width: this.width + "px",
                 height: this.height + "px",
                 fontSize: this.fontSize + "px",
-                borderRadius: this.borderRadius + "px",
+                borderRadius: this.borderRadius,
             };
         },
     },
