@@ -2,10 +2,10 @@
     <div class="header-wrap">
         <h1>{{ header }} <span>→</span></h1>
         <div class="controlls">
-            <div class="controlls-back-wrap">
+            <div class="controlls-back-wrap" ref="refControllsBackWrap" @click="stepBack()">
                 <p>‹</p>
             </div>
-            <div class="controlls-forw-wrap">
+            <div class="controlls-forw-wrap" ref="refControllsForwWrap" @click="stepForw()">
                 <p>›</p>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    name: "category-comp",
+    name: "category-slider",
     props: {
         header: {
             type: String,
@@ -29,10 +29,12 @@ export default {
         return {
             isPressedDown: false,
             cursorXSpace: null,
+            stepWidth: 295,
         };
     },
     methods: {
         mousedownEvent(event) {
+            this.$refs.refCategory.style.transition = "none";
             this.isPressedDown = true;
             this.cursorXSpace = event.pageX - this.$refs.refCategory.offsetLeft;
         },
@@ -50,9 +52,51 @@ export default {
 
             if (parseInt(this.$refs.refCategory.style.left) > 0) {
                 this.$refs.refCategory.style.left = 0;
+                this.$refs.refControllsBackWrap.style.opacity = "0.4";
             } else if (categoryRect.right < containerRect.right) {
                 this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
+                this.$refs.refControllsForwWrap.style.opacity = "0.4";
+            } else {
+                this.$refs.refControllsBackWrap.style.opacity = "1";
+                this.$refs.refControllsForwWrap.style.opacity = "1";
             }
+        },
+
+        stepBack() {
+            this.$refs.refControllsForwWrap.style.opacity = "1";
+            this.$refs.refCategory.style.transition = "all 0.3s";
+
+            if (+this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth < 0) {
+                this.$refs.refCategory.style.left =
+                    +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth + "px";
+            } else {
+                this.$refs.refCategory.style.left = 0;
+                this.$refs.refControllsBackWrap.style.opacity = "0.4";
+            }
+        },
+
+        stepForw() {
+            this.$refs.refControllsBackWrap.style.opacity = "1";
+            this.$refs.refCategory.style.transition = "all 0.3s";
+
+            let containerRect = this.$refs.refContainer.getBoundingClientRect();
+            let categoryRect = this.$refs.refCategory.getBoundingClientRect();
+            console.log("containerRect", categoryRect.right);
+            console.log("categoryRect", containerRect.right);
+
+            if (categoryRect.right - this.stepWidth > containerRect.right) {
+                this.$refs.refCategory.style.left =
+                    +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) - this.stepWidth + "px";
+            } else {
+                this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
+                this.$refs.refControllsForwWrap.style.opacity = "0.4";
+            }
+        },
+    },
+
+    computed: {
+        categoryLeftLength() {
+            return this.$refs.refCategory.style.left.length;
         },
     },
 
@@ -106,6 +150,7 @@ h1 span {
 
 .controlls-back-wrap {
     padding-right: 1px;
+    opacity: 0.4;
 }
 
 .controlls-forw-wrap {

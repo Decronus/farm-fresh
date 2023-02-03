@@ -1,81 +1,10 @@
 <template>
     <header-comp />
     <router-view />
-    <div class="container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
-        <div class="cards" ref="refCards">
-            <div class="card">
-                <h1>Карточка 1</h1>
-                <p>Текст карточки</p>
-            </div>
-            <div class="card">
-                <h1>Карточка 2</h1>
-                <p>Текст карточки</p>
-            </div>
-            <div class="card">
-                <h1>Карточка 3</h1>
-                <p>Текст карточки</p>
-            </div>
-            <div class="card">
-                <h1>Карточка 4</h1>
-                <p>Текст карточки</p>
-            </div>
-            <div class="card">
-                <h1>Карточка 5</h1>
-                <p>Текст карточки</p>
-            </div>
-            <div class="card">
-                <h1>Карточка 6</h1>
-                <p>Текст карточки</p>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            isPressedDown: false,
-            cursorXSpace: null,
-        };
-    },
-    methods: {
-        mousedownEvent(event) {
-            this.isPressedDown = true;
-            this.cursorXSpace = event.pageX - this.$refs.refCards.offsetLeft;
-            console.log("offsetX", event.offsetX);
-            console.log("offsetLeft", this.$refs.refCards.offsetLeft);
-        },
-
-        mousemoveEvent(event) {
-            if (!this.isPressedDown) return;
-            event.preventDefault();
-            this.$refs.refCards.style.left = `${event.pageX - this.cursorXSpace}px`;
-            this.boundCards();
-        },
-
-        boundCards() {
-            let containerRect = this.$refs.refContainer.getBoundingClientRect();
-            let cardsRect = this.$refs.refCards.getBoundingClientRect();
-
-            if (parseInt(this.$refs.refCards.style.left) > 0) {
-                this.$refs.refCards.style.left = 0;
-            } else if (cardsRect.right < containerRect.right) {
-                this.$refs.refCards.style.left = `-${cardsRect.width - containerRect.width}px`;
-            }
-        },
-    },
-
-    created() {
-        window.addEventListener("mouseup", () => {
-            this.isPressedDown = false;
-        });
-    },
-
-    destroyed() {
-        window.removeEventListener("mouseup");
-    },
-};
+export default {};
 </script>
 
 <style>

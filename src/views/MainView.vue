@@ -1,13 +1,19 @@
 <template>
     <div class="main">
-        <category-comp header="Популярные продукты">
+        <category-slider header="Популярные продукты">
             <product-card></product-card>
             <product-card></product-card>
             <product-card></product-card>
             <product-card></product-card>
             <product-card></product-card>
             <product-card></product-card>
-        </category-comp>
+            <product-card></product-card>
+            <product-card></product-card>
+            <product-card></product-card>
+            <product-card></product-card>
+            <product-card></product-card>
+            <product-card></product-card>
+        </category-slider>
     </div>
 </template>
 

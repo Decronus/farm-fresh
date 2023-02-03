@@ -9,7 +9,7 @@
                 <div class="details-first-row">
                     <div class="product-name-and-provider">
                         <p class="product-name">Клубника свежемороженная летний сорт</p>
-                        <p class="product-provider">ИП Гедзун А.Н.</p>
+                        <p class="product-provider">от ИП Гедзун А.Н.</p>
                     </div>
                     <div class="discount-label"><p>-28%</p></div>
                 </div>
