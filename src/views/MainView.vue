@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <category-comp header="Популярные продукты →">
+        <category-comp header="Популярные продукты">
             <product-card></product-card>
             <product-card></product-card>
             <product-card></product-card>

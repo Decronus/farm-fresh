@@ -8,9 +8,7 @@
             <div class="product-card-details">
                 <div class="details-first-row">
                     <div class="product-name-and-provider">
-                        <p class="product-name">
-                            Клубника свежемороженная летний сорт
-                        </p>
+                        <p class="product-name">Клубника свежемороженная летний сорт</p>
                         <p class="product-provider">ИП Гедзун А.Н.</p>
                     </div>
                     <div class="discount-label"><p>-28%</p></div>
@@ -18,15 +16,17 @@
                 <div class="details-second-row">
                     <button-comp
                         title="+ В корзину"
-                        width="120"
+                        width="114"
                         height="36"
+                        fontSize="14"
+                        borderRadius="100"
                     ></button-comp>
                     <div class="product-prices">
                         <div class="discount-price">
-                            <p>2250 ₽/кг</p>
+                            <p>1890 ₽/кг</p>
                         </div>
                         <div class="normal-price">
-                            <p>1890 ₽/кг</p>
+                            <p>2250 ₽/кг</p>
                         </div>
                     </div>
                 </div>
@@ -48,10 +48,10 @@ export default {
     align-items: stretch;
     width: 275px;
     height: 100%;
-    border-radius: 12px;
     font-size: 16px;
     font-weight: 500;
     text-align: left;
+    overflow: hidden;
 }
 
 .product-card-img {
@@ -87,8 +87,8 @@ export default {
 }
 
 .discount-label {
-    width: 54px;
-    height: 32px;
+    width: 50px;
+    height: 26px;
     background: #e65823;
     border-radius: 4px;
     flex-shrink: 0;
