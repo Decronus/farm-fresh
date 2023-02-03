@@ -42,6 +42,10 @@ export default {
 </script>
 
 <style>
+.card-container {
+    width: 275px;
+}
+
 .product-card-wrap {
     display: flex;
     flex-direction: column;

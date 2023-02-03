@@ -13,7 +13,7 @@
         </div>
         <div>
             <div class="category-container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
-                <div class="category-wrap" ref="refCategory">
+                <div class="category-wrap" ref="refCategory" style="transform: translateX(0)">
                     <slot></slot>
                 </div>
             </div>
@@ -38,16 +38,27 @@ export default {
     },
     methods: {
         mousedownEvent(event) {
-            console.log(event);
             this.$refs.refCategory.style.transition = "none";
             this.isPressedDown = true;
-            this.cursorXSpace = event.pageX - this.$refs.refCategory.offsetLeft;
+            // this.cursorXSpace = event.pageX - +this.$refs.refCategory.style.transform.replace(/\D/g, "");
+            this.cursorXSpace = event.pageX - +parseInt(this.$refs.refCategory.style.transform.slice(11));
+            // console.log("pageX", event.pageX);
+            // console.log("offsetLeft", this.$refs.refCategory.offsetLeft);
+            // console.log("transform", +parseInt(this.$refs.refCategory.style.transform.slice(11)));
+            console.log(this.categoryWidth);
         },
 
         mousemoveEvent(event) {
             if (!this.isPressedDown) return;
             event.preventDefault();
-            this.$refs.refCategory.style.left = `${event.pageX - this.cursorXSpace}px`;
+            // this.$refs.refCategory.style.left = `${event.pageX - this.cursorXSpace}px`;
+            this.$refs.refCategory.style.transform = `translateX(${event.pageX - this.cursorXSpace}px)`;
+            console.log("transform", +parseInt(this.$refs.refCategory.style.transform.slice(11)));
+
+            console.log(parseInt(getComputedStyle(this.$refs.refCategory.children[0]).width));
+            // console.log(this.$refs.refCategory.style.transform);
+            console.log(this.categoryWidth);
+
             // this.boundCards();
         },
 
@@ -57,11 +68,24 @@ export default {
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
             let categoryRect = this.$refs.refCategory.getBoundingClientRect();
 
-            if (parseInt(this.$refs.refCategory.style.left) > 0) {
-                this.$refs.refCategory.style.left = 0;
+            // console.log("containerRect.right", containerRect.right);
+            // console.log("categoryRect.right", categoryRect.right);
+            // console.log("containerRect.width", containerRect.width);
+            // console.log("categoryRect.width", categoryRect.width);
+
+            // console.log("containerRect", containerRect);
+            // console.log("categoryRect", categoryRect);
+
+            // console.log("categoryRect", this.$refs.refCategory.clientWidth);
+
+            if (+parseInt(this.$refs.refCategory.style.transform.slice(11)) > 0) {
+                this.$refs.refCategory.style.transform = "translateX(0)";
                 this.$refs.refControllsBackWrap.style.opacity = "0.4";
-            } else if (categoryRect.right < containerRect.right) {
-                this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
+            } else if (
+                this.categoryWidth - Math.abs(+parseInt(this.$refs.refCategory.style.transform.slice(11))) <
+                containerRect.width
+            ) {
+                this.$refs.refCategory.style.transform = `translateX(-${this.categoryWidth - containerRect.width}px)`;
                 this.$refs.refControllsForwWrap.style.opacity = "0.4";
             } else {
                 this.$refs.refControllsBackWrap.style.opacity = "1";
@@ -80,6 +104,18 @@ export default {
                 this.$refs.refCategory.style.left = 0;
                 this.$refs.refControllsBackWrap.style.opacity = "0.4";
             }
+
+            // this.$refs.refControllsForwWrap.style.opacity = "1";
+            // this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
+
+            // if (+parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth < 0) {
+            //     this.$refs.refCategory.style.transform = `translateX(${
+            //         +parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth
+            //     }px)`;
+            // } else {
+            //     this.$refs.refCategory.style.left = 0;
+            //     this.$refs.refControllsBackWrap.style.opacity = "0.4";
+            // }
         },
 
         stepForw() {
@@ -102,6 +138,16 @@ export default {
     computed: {
         categoryLeftLength() {
             return this.$refs.refCategory.style.left.length;
+        },
+        categoryWidth() {
+            let cardWidth = parseInt(getComputedStyle(this.$refs.refCategory.children[0]).width);
+            let cardsAmount = this.$refs.refCategory.children.length;
+            let gapWidth = parseInt(getComputedStyle(this.$refs.refCategory).gap);
+
+            let allGapsWidth = (this.$refs.refCategory.children.length - 1) * gapWidth;
+            let allCardsWidth = cardsAmount * cardWidth;
+            // console.log("categoryWidth", categoryWidth);
+            return allGapsWidth + allCardsWidth;
         },
     },
 
@@ -167,16 +213,18 @@ h1 span {
     position: relative;
     max-width: 1160px;
     overflow: hidden;
-    min-height: 340px;
+    margin-bottom: 50px;
+    /* min-height: 340px; */
 }
 
 .category-wrap {
     display: flex;
     gap: 20px;
-    margin-bottom: 30px;
-    position: absolute;
+
+    /* position: absolute; */
     top: 0;
     left: 0;
+    transform: translateX(0);
 }
 
 /* @media (max-width: 1200px) {
