@@ -10,8 +10,8 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="category-wrap">
+    <div class="container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
+        <div class="category-wrap" ref="refCategory">
             <slot></slot>
         </div>
     </div>
@@ -24,6 +24,46 @@ export default {
         header: {
             type: String,
         },
+    },
+    data() {
+        return {
+            isPressedDown: false,
+            cursorXSpace: null,
+        };
+    },
+    methods: {
+        mousedownEvent(event) {
+            this.isPressedDown = true;
+            this.cursorXSpace = event.pageX - this.$refs.refCategory.offsetLeft;
+        },
+
+        mousemoveEvent(event) {
+            if (!this.isPressedDown) return;
+            event.preventDefault();
+            this.$refs.refCategory.style.left = `${event.pageX - this.cursorXSpace}px`;
+            this.boundCards();
+        },
+
+        boundCards() {
+            let containerRect = this.$refs.refContainer.getBoundingClientRect();
+            let categoryRect = this.$refs.refCategory.getBoundingClientRect();
+
+            if (parseInt(this.$refs.refCategory.style.left) > 0) {
+                this.$refs.refCategory.style.left = 0;
+            } else if (categoryRect.right < containerRect.right) {
+                this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
+            }
+        },
+    },
+
+    created() {
+        window.addEventListener("mouseup", () => {
+            this.isPressedDown = false;
+        });
+    },
+
+    destroyed() {
+        window.removeEventListener("mouseup");
     },
 };
 </script>
