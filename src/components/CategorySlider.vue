@@ -66,7 +66,7 @@ export default {
             this.$refs.refCategory.style.transition = "all 0.2s ease-in-out";
 
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
-            let categoryRect = this.$refs.refCategory.getBoundingClientRect();
+            // let categoryRect = this.$refs.refCategory.getBoundingClientRect();
 
             // console.log("containerRect.right", containerRect.right);
             // console.log("categoryRect.right", categoryRect.right);
@@ -94,43 +94,67 @@ export default {
         },
 
         stepBack() {
-            this.$refs.refControllsForwWrap.style.opacity = "1";
-            this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
-
-            if (+this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth < 0) {
-                this.$refs.refCategory.style.left =
-                    +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth + "px";
-            } else {
-                this.$refs.refCategory.style.left = 0;
-                this.$refs.refControllsBackWrap.style.opacity = "0.4";
-            }
-
             // this.$refs.refControllsForwWrap.style.opacity = "1";
             // this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
 
-            // if (+parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth < 0) {
-            //     this.$refs.refCategory.style.transform = `translateX(${
-            //         +parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth
-            //     }px)`;
+            // if (+this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth < 0) {
+            //     this.$refs.refCategory.style.left =
+            //         +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth + "px";
             // } else {
             //     this.$refs.refCategory.style.left = 0;
             //     this.$refs.refControllsBackWrap.style.opacity = "0.4";
             // }
+
+            this.$refs.refControllsForwWrap.style.opacity = "1";
+            this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
+
+            if (parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth < 0) {
+                this.$refs.refCategory.style.transform = `translateX(${
+                    parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth
+                }px)`;
+            } else {
+                this.$refs.refCategory.style.transform = "translateX(0)";
+                this.$refs.refControllsBackWrap.style.opacity = "0.4";
+            }
         },
 
         stepForw() {
+            // this.$refs.refControllsBackWrap.style.opacity = "1";
+            // this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
+
+            // let containerRect = this.$refs.refContainer.getBoundingClientRect();
+            // let categoryRect = this.$refs.refCategory.getBoundingClientRect();
+
+            // if (categoryRect.right - this.stepWidth > containerRect.right) {
+            //     this.$refs.refCategory.style.left =
+            //         +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) - this.stepWidth + "px";
+            // } else {
+            //     this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
+            //     this.$refs.refControllsForwWrap.style.opacity = "0.4";
+            // }
+
             this.$refs.refControllsBackWrap.style.opacity = "1";
             this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
 
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
-            let categoryRect = this.$refs.refCategory.getBoundingClientRect();
+            // let categoryRect = this.$refs.refCategory.getBoundingClientRect();
 
-            if (categoryRect.right - this.stepWidth > containerRect.right) {
-                this.$refs.refCategory.style.left =
-                    +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) - this.stepWidth + "px";
+            console.log(this.categoryWidth - Math.abs(parseInt(this.$refs.refCategory.style.transform.slice(11))));
+
+            if (
+                this.categoryWidth -
+                    Math.abs(parseInt(this.$refs.refCategory.style.transform.slice(11))) -
+                    this.stepWidth >
+                containerRect.width
+            ) {
+                this.$refs.refCategory.style.transform = `translateX(${
+                    parseInt(this.$refs.refCategory.style.transform.slice(11)) - this.stepWidth
+                }px)`;
+                console.log("1 if");
             } else {
-                this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
+                this.$refs.refCategory.style.transform = `translateX(-${this.categoryWidth - containerRect.width}px)`;
                 this.$refs.refControllsForwWrap.style.opacity = "0.4";
+                console.log("2if");
             }
         },
     },
@@ -220,7 +244,6 @@ h1 span {
 .category-wrap {
     display: flex;
     gap: 20px;
-
     /* position: absolute; */
     top: 0;
     left: 0;

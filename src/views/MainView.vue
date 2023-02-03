@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <category-slider header="Популярные продукты">
-            <product-card v-for="(n, index) in 5" :key="index"></product-card>
+            <product-card v-for="(n, index) in 8" :key="index"></product-card>
         </category-slider>
 
         <category-slider header="Специальные предложения">
