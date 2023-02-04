@@ -11,7 +11,7 @@
                         <p class="product-name">Лосось с/с</p>
                         <p class="product-provider">от ИП Гедзун А.Н.</p>
                     </div>
-                    <div class="discount-label"><p>-28%</p></div>
+                    <label-comp />
                 </div>
                 <div class="details-second-row">
                     <button-comp
@@ -20,6 +20,7 @@
                         height="36"
                         fontSize="14"
                         borderRadius="100px"
+                        @click.stop
                     ></button-comp>
                     <div class="product-prices">
                         <div class="discount-price">
@@ -89,18 +90,6 @@ export default {
 .product-provider {
     font-size: 12px;
     color: #a0a0a0;
-}
-
-.discount-label {
-    width: 50px;
-    height: 26px;
-    background: #e65823;
-    border-radius: 4px;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
 }
 
 .details-first-row {

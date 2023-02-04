@@ -3,6 +3,7 @@ import ButtonComp from "../components/ButtonComp";
 import ModalComp from "../components/ModalComp";
 import ProductCard from "../components/ProductCard";
 import CategorySlider from "../components/CategorySlider";
-import ModalProductCardExtended from "../components/ModalProductCardExtended";
+import ProductCardExtended from "../components/ProductCardExtended";
+import LabelComp from "../components/LabelComp";
 
-export default [HeaderComp, ButtonComp, ModalComp, ProductCard, CategorySlider, ModalProductCardExtended];
+export default [HeaderComp, ButtonComp, ModalComp, ProductCard, CategorySlider, ProductCardExtended, LabelComp];

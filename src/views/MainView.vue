@@ -14,7 +14,7 @@
         :visibility="$store.state.modalProductCardVisibility"
         @close="$store.commit('toggleModalProductCard', false)"
     >
-        <h1>Продуктовая карточка расширенная</h1>
+        <product-card-extended />
     </modal-comp>
 </template>
 
