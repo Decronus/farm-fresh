@@ -43,9 +43,10 @@ export default {
     top: 0;
     left: 0;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background: rgba(0, 0, 0, 0.3);
     z-index: 10;
+    overflow-y: auto;
 }
 
 .modal-component-wrap {
@@ -53,9 +54,10 @@ export default {
     min-width: 300px;
     min-height: 200px;
     background: #ffffff;
-    padding: 50px;
+    /* padding: 50px; */
     border-radius: 20px;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+    margin-top: 30px;
     margin-bottom: 10%;
 }
 

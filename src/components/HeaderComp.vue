@@ -173,6 +173,7 @@ export default {
     align-items: flex-start;
     gap: 10px;
     font-weight: 500;
+    padding: 50px;
 }
 
 .city-item {

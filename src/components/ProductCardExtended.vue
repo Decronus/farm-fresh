@@ -57,6 +57,8 @@ export default {
 <style scoped>
 .product-card-extended-wrap {
     max-width: 948px;
+    /* padding: 50px; */
+    /* overflow: visible; */
 }
 
 .product-card-extended-img-and-details {
@@ -72,8 +74,8 @@ export default {
     background-size: cover;
     background-position: center;
     border-radius: 12px 0 0 0;
-    margin-left: -50px;
-    margin-top: -50px;
+    /* margin-left: -50px;
+    margin-top: -50px; */
 }
 
 .product-card-extended-details {
@@ -82,6 +84,7 @@ export default {
     align-items: flex-start;
     gap: 25px;
     width: 400px;
+    margin: 50px 50px 0 0;
 }
 
 .details-name-and-provider {
@@ -143,13 +146,30 @@ export default {
 }
 .product-card-extended-footer {
     border-radius: 0px 0px 20px 20px;
-    margin-left: -50px;
-    margin-bottom: -50px;
     padding: 26px 50px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
     text-align: left;
+}
+
+@media (max-width: 768px) {
+    .product-card-extended-img-and-details {
+        flex-direction: column;
+    }
+
+    .product-card-extended-details {
+        margin: 0 50px 50px 50px;
+    }
+    .product-card-extended-img {
+        width: 100%;
+        height: 300px;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .product-card-extended-footer {
+        padding: 0 50px 100px 50px;
+    }
 }
 </style>
