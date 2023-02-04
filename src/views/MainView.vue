@@ -8,6 +8,14 @@
             <product-card v-for="(n, index) in 9" :key="index"></product-card>
         </category-slider>
     </div>
+
+    <!-- Расширенная продуктовая карточка -->
+    <modal-comp
+        :visibility="$store.state.modalProductCardVisibility"
+        @close="$store.commit('toggleModalProductCard', false)"
+    >
+        <h1>Продуктовая карточка расширенная</h1>
+    </modal-comp>
 </template>
 
 <script>

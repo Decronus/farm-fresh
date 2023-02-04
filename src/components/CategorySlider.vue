@@ -1,24 +1,24 @@
 <template>
-    <div>
-        <div class="header-wrap">
-            <h1>{{ header }} <span>→</span></h1>
-            <div class="controlls">
-                <div class="controlls-back-wrap" ref="refControllsBackWrap" @click="stepBack()">
-                    <p>‹</p>
-                </div>
-                <div class="controlls-forw-wrap" ref="refControllsForwWrap" @click="stepForw()">
-                    <p>›</p>
-                </div>
+    <!-- <div> -->
+    <div class="header-wrap">
+        <h1>{{ header }} <span>→</span></h1>
+        <div class="controlls">
+            <div class="controlls-back-wrap inactive" ref="refControllsBackWrap" @click.stop="stepBack()">
+                <p>‹</p>
             </div>
-        </div>
-        <div>
-            <div class="category-container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
-                <div class="category-wrap" ref="refCategory" style="transform: translateX(0)">
-                    <slot></slot>
-                </div>
+            <div class="controlls-forw-wrap" ref="refControllsForwWrap" @click.stop="stepForw()">
+                <p>›</p>
             </div>
         </div>
     </div>
+    <div>
+        <div class="category-container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
+            <div class="category-wrap" ref="refCategory" style="transform: translateX(0)">
+                <slot></slot>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -40,25 +40,14 @@ export default {
         mousedownEvent(event) {
             this.$refs.refCategory.style.transition = "none";
             this.isPressedDown = true;
-            // this.cursorXSpace = event.pageX - +this.$refs.refCategory.style.transform.replace(/\D/g, "");
             this.cursorXSpace = event.pageX - +parseInt(this.$refs.refCategory.style.transform.slice(11));
-            // console.log("pageX", event.pageX);
-            // console.log("offsetLeft", this.$refs.refCategory.offsetLeft);
-            // console.log("transform", +parseInt(this.$refs.refCategory.style.transform.slice(11)));
-            console.log(this.categoryWidth);
         },
 
         mousemoveEvent(event) {
             if (!this.isPressedDown) return;
             event.preventDefault();
-            // this.$refs.refCategory.style.left = `${event.pageX - this.cursorXSpace}px`;
             this.$refs.refCategory.style.transform = `translateX(${event.pageX - this.cursorXSpace}px)`;
-            console.log("transform", +parseInt(this.$refs.refCategory.style.transform.slice(11)));
-
-            console.log(parseInt(getComputedStyle(this.$refs.refCategory.children[0]).width));
-            // console.log(this.$refs.refCategory.style.transform);
-            console.log(this.categoryWidth);
-
+            this.$store.commit("toggleSliderMoving", true);
             // this.boundCards();
         },
 
@@ -66,46 +55,38 @@ export default {
             this.$refs.refCategory.style.transition = "all 0.2s ease-in-out";
 
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
-            // let categoryRect = this.$refs.refCategory.getBoundingClientRect();
-
-            // console.log("containerRect.right", containerRect.right);
-            // console.log("categoryRect.right", categoryRect.right);
-            // console.log("containerRect.width", containerRect.width);
-            // console.log("categoryRect.width", categoryRect.width);
-
-            // console.log("containerRect", containerRect);
-            // console.log("categoryRect", categoryRect);
-
-            // console.log("categoryRect", this.$refs.refCategory.clientWidth);
 
             if (+parseInt(this.$refs.refCategory.style.transform.slice(11)) > 0) {
                 this.$refs.refCategory.style.transform = "translateX(0)";
-                this.$refs.refControllsBackWrap.style.opacity = "0.4";
+                // this.$refs.refControllsBackWrap.style.opacity = "0.4";
+                this.$refs.refControllsBackWrap.classList.add("inactive");
             } else if (
                 this.categoryWidth - Math.abs(+parseInt(this.$refs.refCategory.style.transform.slice(11))) <
                 containerRect.width
             ) {
                 this.$refs.refCategory.style.transform = `translateX(-${this.categoryWidth - containerRect.width}px)`;
-                this.$refs.refControllsForwWrap.style.opacity = "0.4";
+
+                // this.$refs.refControllsForwWrap.style.opacity = "0.4";
+                this.$refs.refControllsForwWrap.classList.add("inactive");
             } else {
-                this.$refs.refControllsBackWrap.style.opacity = "1";
-                this.$refs.refControllsForwWrap.style.opacity = "1";
+                //Корректные стили при крайних состояниях слайдера
+                if (this.$refs.refCategory.style.transform !== "translateX(0px)") {
+                    // this.$refs.refControllsBackWrap.style.opacity = "1";
+                    this.$refs.refControllsBackWrap.classList.remove("inactive");
+                }
+                if (
+                    this.$refs.refCategory.style.transform !==
+                    `translateX(-${this.categoryWidth - containerRect.width}px)`
+                ) {
+                    // this.$refs.refControllsForwWrap.style.opacity = "1";
+                    this.$refs.refControllsForwWrap.classList.remove("inactive");
+                }
             }
         },
 
         stepBack() {
+            this.$refs.refControllsForwWrap.classList.remove("inactive");
             // this.$refs.refControllsForwWrap.style.opacity = "1";
-            // this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
-
-            // if (+this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth < 0) {
-            //     this.$refs.refCategory.style.left =
-            //         +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) + this.stepWidth + "px";
-            // } else {
-            //     this.$refs.refCategory.style.left = 0;
-            //     this.$refs.refControllsBackWrap.style.opacity = "0.4";
-            // }
-
-            this.$refs.refControllsForwWrap.style.opacity = "1";
             this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
 
             if (parseInt(this.$refs.refCategory.style.transform.slice(11)) + this.stepWidth < 0) {
@@ -114,32 +95,17 @@ export default {
                 }px)`;
             } else {
                 this.$refs.refCategory.style.transform = "translateX(0)";
-                this.$refs.refControllsBackWrap.style.opacity = "0.4";
+                // this.$refs.refControllsBackWrap.style.opacity = "0.4";
+                this.$refs.refControllsBackWrap.classList.add("inactive");
             }
         },
 
         stepForw() {
+            this.$refs.refControllsBackWrap.classList.remove("inactive");
             // this.$refs.refControllsBackWrap.style.opacity = "1";
-            // this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
-
-            // let containerRect = this.$refs.refContainer.getBoundingClientRect();
-            // let categoryRect = this.$refs.refCategory.getBoundingClientRect();
-
-            // if (categoryRect.right - this.stepWidth > containerRect.right) {
-            //     this.$refs.refCategory.style.left =
-            //         +this.$refs.refCategory.style.left.slice(0, this.categoryLeftLength - 2) - this.stepWidth + "px";
-            // } else {
-            //     this.$refs.refCategory.style.left = `-${categoryRect.width - containerRect.width}px`;
-            //     this.$refs.refControllsForwWrap.style.opacity = "0.4";
-            // }
-
-            this.$refs.refControllsBackWrap.style.opacity = "1";
             this.$refs.refCategory.style.transition = "all 0.3s ease-in-out";
 
             let containerRect = this.$refs.refContainer.getBoundingClientRect();
-            // let categoryRect = this.$refs.refCategory.getBoundingClientRect();
-
-            console.log(this.categoryWidth - Math.abs(parseInt(this.$refs.refCategory.style.transform.slice(11))));
 
             if (
                 this.categoryWidth -
@@ -150,11 +116,10 @@ export default {
                 this.$refs.refCategory.style.transform = `translateX(${
                     parseInt(this.$refs.refCategory.style.transform.slice(11)) - this.stepWidth
                 }px)`;
-                console.log("1 if");
             } else {
                 this.$refs.refCategory.style.transform = `translateX(-${this.categoryWidth - containerRect.width}px)`;
-                this.$refs.refControllsForwWrap.style.opacity = "0.4";
-                console.log("2if");
+                // this.$refs.refControllsForwWrap.style.opacity = "0.4";
+                this.$refs.refControllsForwWrap.classList.add("inactive");
             }
         },
     },
@@ -170,7 +135,7 @@ export default {
 
             let allGapsWidth = (this.$refs.refCategory.children.length - 1) * gapWidth;
             let allCardsWidth = cardsAmount * cardWidth;
-            // console.log("categoryWidth", categoryWidth);
+
             return allGapsWidth + allCardsWidth;
         },
     },
@@ -216,8 +181,20 @@ h1 span {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #dae8d9;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
     cursor: pointer;
+}
+
+.controlls div:hover {
+    background: #57c053;
+    color: #ffffff;
+    border: none;
+}
+
+.inactive {
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 .controlls p {
@@ -226,7 +203,6 @@ h1 span {
 
 .controlls-back-wrap {
     padding-right: 1px;
-    opacity: 0.4;
 }
 
 .controlls-forw-wrap {
@@ -234,9 +210,9 @@ h1 span {
 }
 
 .category-container {
-    position: relative;
+    /* position: relative; */
     max-width: 1160px;
-    overflow: hidden;
+    overflow-x: hidden;
     margin-bottom: 50px;
     /* min-height: 340px; */
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="card-container">
+    <div class="card-container" @click="$store.commit('toggleModalProductCard', true)">
         <div class="product-card-wrap">
             <div class="product-card-img-container">
                 <div class="product-card-img"></div>
