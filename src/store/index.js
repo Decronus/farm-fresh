@@ -5,6 +5,7 @@ export default createStore({
         currentCity: null,
         modalProductCardVisibility: false,
         isSliderMoving: false,
+        productsInCart: [],
     },
     getters: {},
     mutations: {
@@ -23,6 +24,10 @@ export default createStore({
 
         toggleSliderMoving(state, payload) {
             state.isSliderMoving = payload;
+        },
+
+        addToCart(state) {
+            state.productsInCart.push("item");
         },
     },
     actions: {},

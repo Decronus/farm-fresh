@@ -7,12 +7,22 @@
                     <p class="details-name">Лосось с/с</p>
                     <p class="details-provider">от ИП Гедзун А.Н.</p>
                 </div>
+
                 <div class="details-desc">
+                    <!-- <p class="show-desc-paragraph" @click="descVisibility = !descVisibility">
+                        Состав и описание {{ !descVisibility ? "↓" : "↑" }}
+                    </p> -->
+                    <!-- <transition name="fade"> -->
+                    <!-- <div v-if="descVisibility"> -->
+                    <p class="details-definition">Нежный слабосоленый норвежский лосось.</p>
                     <p class="details-composition">
-                        <span>Состав: </span>лосось, соль, розмарин, перец чёрный, перец, душистый, лимон.
+                        <span>Состав: </span>лосось, соль, розмарин, перец чёрный, перец душистый, лимон.
                     </p>
-                    <p class="details-definition"><span>Описание: </span>нежный слабосоленый норвежский лосось.</p>
+
+                    <!-- </div> -->
+                    <!-- </transition> -->
                 </div>
+
                 <div class="details-prices-and-button">
                     <div class="details-prices">
                         <label-comp width="54" height="24" fontSize="16" />
@@ -23,6 +33,7 @@
                             <p>2250 ₽/кг</p>
                         </div>
                     </div>
+
                     <button-comp
                         title="+ В корзину"
                         width="136"
@@ -51,6 +62,11 @@
 <script>
 export default {
     name: "product-card-extended",
+    data() {
+        return {
+            descVisibility: false,
+        };
+    },
 };
 </script>
 
@@ -69,7 +85,7 @@ export default {
 
 .product-card-extended-img {
     width: 600px;
-    height: 400px;
+    height: 450px;
     background-image: url("https://avatars.dzeninfra.ru/get-zen_doc/5308396/pub_62175f2aae05623d0f02e954_62176f138459884847653267/scale_1200");
     background-size: cover;
     background-position: center;
@@ -83,7 +99,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     gap: 25px;
-    width: 400px;
+    width: 340px;
     margin: 50px 50px 0 0;
 }
 
@@ -111,6 +127,7 @@ export default {
     text-align: left;
     gap: 16px;
 }
+
 .details-definition {
     font-weight: 400;
 }
@@ -154,12 +171,30 @@ export default {
     text-align: left;
 }
 
+.show-desc-paragraph {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.fade-enter-active {
+    transition: all 0.2s ease-out;
+}
+.fade-leave-active {
+    transition: all 0.2s ease-out;
+}
+.fade-enter,
+.fade-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
 @media (max-width: 768px) {
     .product-card-extended-img-and-details {
         flex-direction: column;
     }
 
     .product-card-extended-details {
+        max-width: 768px;
         margin: 0 50px 50px 50px;
     }
     .product-card-extended-img {
@@ -170,6 +205,22 @@ export default {
 
     .product-card-extended-footer {
         padding: 0 50px 100px 50px;
+    }
+}
+
+@media (max-width: 500px) {
+    .product-card-extended-details {
+        margin: 0 20px 20px 20px;
+    }
+
+    .product-card-extended-img {
+        width: 100%;
+        height: 220px;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .product-card-extended-footer {
+        padding: 20px 20px 100px 20px;
     }
 }
 </style>

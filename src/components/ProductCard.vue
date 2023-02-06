@@ -8,19 +8,20 @@
             <div class="product-card-details">
                 <div class="details-first-row">
                     <div class="product-name-and-provider">
-                        <p class="product-name">Лосось с/с</p>
+                        <p class="product-name">Лосось слабосоленый</p>
                         <p class="product-provider">от ИП Гедзун А.Н.</p>
                     </div>
                     <label-comp />
                 </div>
                 <div class="details-second-row">
                     <button-comp
-                        title="+ В корзину"
+                        :title="isInCart ? 'В корзине' : '+ В корзину'"
                         width="114"
                         height="36"
                         fontSize="14"
                         borderRadius="100px"
-                        @click.stop
+                        :style="inCartStyle"
+                        @click.stop="addToCart"
                     ></button-comp>
                     <div class="product-prices">
                         <div class="discount-price">
@@ -39,6 +40,29 @@
 <script>
 export default {
     name: "product-card",
+    data() {
+        return {
+            isInCart: false,
+        };
+    },
+    methods: {
+        addToCart() {
+            this.$store.commit("addToCart");
+            this.isInCart = true;
+        },
+    },
+
+    computed: {
+        inCartStyle() {
+            if (this.isInCart)
+                return {
+                    pointerEvents: "none",
+                    background: "#9EAC9D",
+                    filter: "none",
+                    // color: "#2E2E34",
+                };
+        },
+    },
 };
 </script>
 

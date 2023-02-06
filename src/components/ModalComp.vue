@@ -66,6 +66,13 @@ export default {
     right: 20px;
     top: 20px;
     cursor: pointer;
+    background: #ffffff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
 }
 
 .modal-enter-active {

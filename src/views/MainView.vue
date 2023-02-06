@@ -16,6 +16,8 @@
     >
         <product-card-extended />
     </modal-comp>
+
+    <router-view></router-view>
 </template>
 
 <script>

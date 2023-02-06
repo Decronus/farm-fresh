@@ -31,6 +31,7 @@ export default {
     },
     data() {
         return {
+            // mouseupListener: null,
             isPressedDown: false,
             cursorXSpace: null,
             stepWidth: 295,
@@ -122,6 +123,11 @@ export default {
                 this.$refs.refControllsForwWrap.classList.add("inactive");
             }
         },
+
+        mouseupListener() {
+            this.isPressedDown = false;
+            this.boundCards();
+        },
     },
 
     computed: {
@@ -141,14 +147,11 @@ export default {
     },
 
     created() {
-        window.addEventListener("mouseup", () => {
-            this.isPressedDown = false;
-            this.boundCards();
-        });
+        window.addEventListener("mouseup", this.mouseupListener);
     },
 
-    destroyed() {
-        window.removeEventListener("mouseup");
+    unmounted() {
+        window.removeEventListener("mouseup", this.mouseupListener);
     },
 };
 </script>

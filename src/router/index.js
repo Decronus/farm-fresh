@@ -1,20 +1,26 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainView from "../views/MainView.vue";
+import CartView from "../views/CartView.vue";
+import ModalComp from "../components/ModalComp.vue";
 
 const routes = [
     {
         path: "/",
         name: "main",
         component: MainView,
+        children: [
+            {
+                path: "/catalog",
+                name: "modal-comp",
+                component: ModalComp,
+            },
+        ],
     },
+
     {
-        path: "/about",
-        name: "about",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+        path: "/cart",
+        name: "cart",
+        component: CartView,
     },
 ];
 

@@ -61,6 +61,7 @@ export default {
     flex-shrink: 0;
     font-weight: 500;
     filter: drop-shadow(0px 4px 6px rgba(87, 192, 83, 0.5));
+    position: relative;
 }
 
 .button-title {
