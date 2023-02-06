@@ -37,6 +37,10 @@ h3 {
     font-weight: 500;
 }
 
+h1 {
+    font-size: 30px;
+}
+
 input {
     font-family: Fira Sans;
 }
@@ -48,7 +52,7 @@ input {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -74,5 +78,11 @@ input {
     width: 200px;
     height: 200px;
     pointer-events: none;
+}
+
+@media (max-width: 660px) {
+    h1 {
+        font-size: 24px;
+    }
 }
 </style>

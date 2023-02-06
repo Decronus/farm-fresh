@@ -4,7 +4,7 @@
             <div class="cart-product-img"></div>
             <div class="cart-product-info">
                 <div class="cart-product-name">Сыр «Камамбер»</div>
-                <div class="cart-product-provider">от ООО «Сырский дом»</div>
+                <!-- <div class="cart-product-provider">от ООО «Сырский дом»</div> -->
                 <div class="cart-product-price">1990 ₽/кг</div>
             </div>
         </div>
@@ -71,11 +71,11 @@ export default {
     color: #2e2e34;
 }
 
-.cart-product-provider {
+/* .cart-product-provider {
     font-weight: 400;
     font-size: 14px;
     color: #a0a0a0;
-}
+} */
 
 .cart-product-price {
     font-weight: 400;
@@ -132,9 +132,9 @@ export default {
         grid-template-columns: 2fr 1fr 1fr 0fr;
     }
 
-    .cart-product-name {
+    /* .cart-product-name {
         font-size: 14px;
-    }
+    } */
 
     .cart-product-provider {
         font-size: 12px;

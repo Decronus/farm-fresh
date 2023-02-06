@@ -1,7 +1,7 @@
 <template>
     <!-- <div> -->
     <div class="header-wrap">
-        <h1>{{ header }} <span>→</span></h1>
+        <h1>{{ header }}&nbsp;<span>→</span></h1>
         <div class="controlls">
             <div class="controlls-back-wrap inactive" ref="refControllsBackWrap" @click.stop="stepBack()">
                 <p>‹</p>
@@ -162,11 +162,12 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 14px;
+    gap: 20px;
 }
 
-h1 {
+/* h1 {
     font-size: 30px;
-}
+} */
 
 h1 span {
     cursor: pointer;
@@ -249,11 +250,11 @@ h1 span {
     .category-wrap {
         grid-template-columns: 1fr;
     }
-}
-
-@media (max-width: 600px) {
-    .category-wrap {
-        grid-template-columns: 1fr;
-    }
 } */
+
+@media (max-width: 660px) {
+    .category-container {
+        margin-bottom: 30px;
+    }
+}
 </style>

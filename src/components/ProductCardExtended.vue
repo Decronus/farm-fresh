@@ -208,6 +208,12 @@ export default {
     }
 }
 
+@media (max-width: 648px) {
+    .product-card-extended-img {
+        border-radius: 0;
+    }
+}
+
 @media (max-width: 500px) {
     .product-card-extended-details {
         margin: 0 20px 20px 20px;
@@ -216,7 +222,6 @@ export default {
     .product-card-extended-img {
         width: 100%;
         height: 220px;
-        border-radius: 12px 12px 0 0;
     }
 
     .product-card-extended-footer {

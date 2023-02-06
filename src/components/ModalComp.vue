@@ -88,4 +88,11 @@ export default {
     transform: translateY(-70px);
     opacity: 0;
 }
+
+@media (max-width: 650px) {
+    .modal-component-wrap {
+        margin-top: 0;
+        border-radius: 0;
+    }
+}
 </style>

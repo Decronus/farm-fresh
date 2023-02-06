@@ -15,7 +15,7 @@
                 </div>
                 <div class="details-second-row">
                     <button-comp
-                        :title="isInCart ? 'В корзине' : '+ В корзину'"
+                        :title="isInCart ? '✓ В корзине' : '+ В корзину'"
                         width="114"
                         height="36"
                         fontSize="14"
