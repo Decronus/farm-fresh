@@ -32,13 +32,15 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+p {
     text-align: left;
     font-weight: 500;
 }
 
 h1 {
     font-size: 30px;
+    margin-bottom: 14px;
 }
 
 input {

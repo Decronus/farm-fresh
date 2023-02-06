@@ -123,6 +123,10 @@ export default {
     font-size: 16px;
 }
 
+.cart-delete-position {
+    cursor: pointer;
+}
+
 @media (max-width: 660px) {
     .cart-product-img-and-info {
         flex-direction: column;

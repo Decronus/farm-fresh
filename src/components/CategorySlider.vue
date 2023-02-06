@@ -12,7 +12,14 @@
         </div>
     </div>
     <div>
-        <div class="category-container" ref="refContainer" @mousedown="mousedownEvent" @mousemove="mousemoveEvent">
+        <div
+            class="category-container"
+            ref="refContainer"
+            @mousedown="mousedownEvent"
+            @mousemove="mousemoveEvent"
+            @touchstart="mousedownEvent"
+            @touchmove="mousemoveEvent"
+        >
             <div class="category-wrap" ref="refCategory" style="transform: translateX(0)">
                 <slot></slot>
             </div>
@@ -38,17 +45,26 @@ export default {
         };
     },
     methods: {
+        getEventType(event) {
+            return event.type.search("touch") !== -1 ? event.touches[0] : event;
+        },
+
         mousedownEvent(event) {
+            this.$store.commit("toggleSliderMoving", false);
             this.$refs.refCategory.style.transition = "none";
             this.isPressedDown = true;
-            this.cursorXSpace = event.pageX - +parseInt(this.$refs.refCategory.style.transform.slice(11));
+            this.cursorXSpace =
+                this.getEventType(event).clientX - parseInt(this.$refs.refCategory.style.transform.slice(11));
         },
 
         mousemoveEvent(event) {
             if (!this.isPressedDown) return;
             event.preventDefault();
-            this.$refs.refCategory.style.transform = `translateX(${event.pageX - this.cursorXSpace}px)`;
+            this.$refs.refCategory.style.transform = `translateX(${
+                this.getEventType(event).clientX - this.cursorXSpace
+            }px)`;
             this.$store.commit("toggleSliderMoving", true);
+
             // this.boundCards();
         },
 
@@ -148,10 +164,12 @@ export default {
 
     created() {
         window.addEventListener("mouseup", this.mouseupListener);
+        window.addEventListener("touchend", this.mouseupListener);
     },
 
     unmounted() {
         window.removeEventListener("mouseup", this.mouseupListener);
+        window.addEventListener("touchend", this.mouseupListener);
     },
 };
 </script>

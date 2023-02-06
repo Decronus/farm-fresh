@@ -7,6 +7,10 @@
         <category-slider header="Специальные предложения">
             <product-card v-for="(n, index) in 9" :key="index"></product-card>
         </category-slider>
+
+        <category-slider header="Акции">
+            <product-card v-for="(n, index) in 9" :key="index"></product-card>
+        </category-slider>
     </div>
 
     <!-- Расширенная продуктовая карточка -->

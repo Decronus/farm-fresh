@@ -59,7 +59,6 @@ export default {
                     pointerEvents: "none",
                     background: "#9EAC9D",
                     filter: "none",
-                    // color: "#2E2E34",
                 };
         },
     },

@@ -25,7 +25,7 @@
                         />
                     </svg>
 
-                    <p>{{ $store.state.currentCity || "Выберите город" }}</p>
+                    <p class="menu-item">{{ $store.state.currentCity || "Выберите город" }}</p>
                 </div>
             </div>
             <div class="burger">
@@ -112,12 +112,10 @@ export default {
         cityChoice(event) {
             this.$store.commit("cityChoice", event.target.textContent);
             this.selectCityModalVisibility = false;
-            console.log([...this.$refs.refHeader.classList].includes("header-hidden"));
         },
 
         scrollListener() {
             const headerRect = this.$refs.refHeader.getBoundingClientRect();
-            console.log("rect", headerRect.height);
 
             this.prevScrollY = this.currentScrollY;
             this.currentScrollY = scrollY;
@@ -134,8 +132,6 @@ export default {
                     }
                 }
             }
-
-            console.log(scrollY);
         },
 
         // openModal() {
@@ -173,6 +169,10 @@ export default {
     transform: translateY(-100%);
 }
 
+.shadowed {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+}
+
 .nav-top {
     display: flex;
     justify-content: space-between;
@@ -196,6 +196,7 @@ export default {
 
 .menu-item {
     cursor: pointer;
+    font-weight: 400;
 }
 
 .v-field__append-inner {
@@ -298,6 +299,14 @@ export default {
 
     .button.search-button {
         display: none;
+    }
+
+    .search-menu {
+        gap: 10px;
+    }
+
+    .search-menu-buttons {
+        gap: 10px;
     }
 
     .search-input {
