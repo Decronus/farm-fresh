@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="search-menu">
-            <button-comp class="catalog" title="Каталог">
+            <button-comp class="catalog" title="Каталог" width="140">
                 <svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="28" height="2" rx="1" fill="white" />
                     <rect y="7" width="28" height="2" rx="1" fill="white" />
@@ -60,7 +60,7 @@
 
             <div class="search-menu-buttons">
                 <router-link to="cart">
-                    <button-comp width="60" class="search-menu-item">
+                    <button-comp class="search-menu-item">
                         <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M9.13691 24.2482C7.52457 24.2482 6.22003 25.5674 6.22003 27.1798C6.22003 28.7921 7.52457 30.1113 9.13691 30.1113C10.7493 30.1113 12.0685 28.7921 12.0685 27.1798C12.0685 25.5674 10.7493 24.2482 9.13691 24.2482ZM0.342285 0.795898V3.72744H3.27383L8.55061 14.8526L6.57181 18.4438C6.33729 18.8542 6.20537 19.3379 6.20537 19.8509C6.20537 21.4633 7.52457 22.7825 9.13691 22.7825H26.7262V19.8509H9.75254C9.54733 19.8509 9.3861 19.6897 9.3861 19.4845L9.43007 19.3086L10.7493 16.9194H21.6693C22.7686 16.9194 23.736 16.3184 24.2344 15.4096L29.4818 5.89678C29.5991 5.69158 29.6577 5.44239 29.6577 5.19321C29.6577 4.38704 28.9981 3.72744 28.1919 3.72744H6.51318L5.13536 0.795898H0.342285ZM23.7946 24.2482C22.1823 24.2482 20.8777 25.5674 20.8777 27.1798C20.8777 28.7921 22.1823 30.1113 23.7946 30.1113C25.407 30.1113 26.7262 28.7921 26.7262 27.1798C26.7262 25.5674 25.407 24.2482 23.7946 24.2482Z"
@@ -74,7 +74,7 @@
                     </button-comp>
                 </router-link>
 
-                <button-comp width="60" class="search-menu-item">
+                <button-comp class="search-menu-item">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M15 0C6.72 0 0 6.72 0 15C0 23.28 6.72 30 15 30C23.28 30 30 23.28 30 15C30 6.72 23.28 0 15 0ZM15 4.5C17.49 4.5 19.5 6.51 19.5 9C19.5 11.49 17.49 13.5 15 13.5C12.51 13.5 10.5 11.49 10.5 9C10.5 6.51 12.51 4.5 15 4.5ZM15 25.8C11.25 25.8 7.935 23.88 6 20.97C6.045 17.985 12 16.35 15 16.35C17.985 16.35 23.955 17.985 24 20.97C22.065 23.88 18.75 25.8 15 25.8Z"
@@ -245,6 +245,11 @@ export default {
     gap: 20px;
 }
 
+.button.search-menu-item {
+    width: 60px;
+    height: 50px;
+}
+
 .city-list {
     display: flex;
     flex-direction: column;
@@ -301,6 +306,15 @@ export default {
         display: none;
     }
 
+    .button.search-menu-item {
+        width: 40px;
+        height: 40px;
+    }
+
+    .button.search-menu-item svg {
+        height: 20px;
+    }
+
     .search-menu {
         gap: 10px;
     }
@@ -311,6 +325,8 @@ export default {
 
     .search-input {
         border-radius: 12px;
+        height: 40px;
+        padding: 0 15px;
     }
 }
 </style>

@@ -60,9 +60,11 @@ export default {
         mousemoveEvent(event) {
             if (!this.isPressedDown) return;
             event.preventDefault();
+
             this.$refs.refCategory.style.transform = `translateX(${
                 this.getEventType(event).clientX - this.cursorXSpace
             }px)`;
+
             this.$store.commit("toggleSliderMoving", true);
 
             // this.boundCards();
@@ -162,14 +164,14 @@ export default {
         },
     },
 
-    created() {
+    mounted() {
         window.addEventListener("mouseup", this.mouseupListener);
         window.addEventListener("touchend", this.mouseupListener);
     },
 
     unmounted() {
         window.removeEventListener("mouseup", this.mouseupListener);
-        window.addEventListener("touchend", this.mouseupListener);
+        window.removeEventListener("touchend", this.mouseupListener);
     },
 };
 </script>
@@ -273,6 +275,14 @@ h1 span {
 @media (max-width: 660px) {
     .category-container {
         margin-bottom: 30px;
+    }
+
+    .header-wrap {
+        margin-bottom: 0;
+    }
+
+    .header-wrap .controlls {
+        margin-bottom: 10px;
     }
 }
 </style>

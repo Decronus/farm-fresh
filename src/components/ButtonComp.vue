@@ -16,12 +16,12 @@ export default {
         width: {
             type: String,
             required: false,
-            default: "140",
+            // default: "140",
         },
         height: {
             type: String,
             required: false,
-            default: "50",
+            // default: "50",
         },
 
         fontSize: {

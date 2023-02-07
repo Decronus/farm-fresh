@@ -128,7 +128,8 @@ export default {
     gap: 16px;
 }
 
-.details-definition {
+.details-definition,
+.details-composition {
     font-weight: 400;
 }
 
