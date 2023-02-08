@@ -130,15 +130,16 @@ export default {
 @media (max-width: 660px) {
     .cart-product-img-and-info {
         flex-direction: column;
+        gap: 8px;
+    }
+
+    .cart-product-info {
+        gap: 0;
     }
 
     .cart-product-wrap {
         grid-template-columns: 2fr 1fr 1fr 0fr;
     }
-
-    /* .cart-product-name {
-        font-size: 14px;
-    } */
 
     .cart-product-provider {
         font-size: 12px;
@@ -162,8 +163,5 @@ export default {
         width: 12px;
         margin-top: 2px;
     }
-}
-
-@media (max-width: 660px) {
 }
 </style>

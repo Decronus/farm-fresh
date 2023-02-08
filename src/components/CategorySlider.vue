@@ -38,19 +38,32 @@ export default {
     },
     data() {
         return {
-            // mouseupListener: null,
             isPressedDown: false,
             cursorXSpace: null,
             stepWidth: 295,
+
+            currClientX: null,
+            currClientY: null,
+
+            prevClientX: null,
+            prevClientY: null,
         };
     },
     methods: {
+        cursorPositions(event) {
+            this.currClientX = this.getEventType(event).clientX;
+            this.currClientY = this.getEventType(event).clientY;
+        },
+
         getEventType(event) {
             return event.type.search("touch") !== -1 ? event.touches[0] : event;
         },
 
         mousedownEvent(event) {
             this.$store.commit("toggleSliderMoving", false);
+
+            this.cursorPositions(event);
+
             this.$refs.refCategory.style.transition = "none";
             this.isPressedDown = true;
             this.cursorXSpace =
@@ -59,13 +72,23 @@ export default {
 
         mousemoveEvent(event) {
             if (!this.isPressedDown) return;
-            event.preventDefault();
 
-            this.$refs.refCategory.style.transform = `translateX(${
-                this.getEventType(event).clientX - this.cursorXSpace
-            }px)`;
+            let moveX = this.getEventType(event).clientX;
+            let moveY = this.getEventType(event).clientY;
 
-            this.$store.commit("toggleSliderMoving", true);
+            // console.log(Math.abs(this.currClientX - moveX) > Math.abs(this.currClientY - moveY));
+
+            if (Math.abs(this.currClientX - moveX) > 10) {
+                document.body.style.overflow = "hidden";
+
+                this.$refs.refCategory.style.transform = `translateX(${
+                    this.getEventType(event).clientX - this.cursorXSpace
+                }px)`;
+
+                this.$store.commit("toggleSliderMoving", true);
+            } else {
+                // this.$refs.refContainer.style.pointerEvents = "none";
+            }
 
             // this.boundCards();
         },
@@ -144,6 +167,10 @@ export default {
 
         mouseupListener() {
             this.isPressedDown = false;
+
+            document.body.style.overflow = "";
+            // this.$refs.refContainer.style.pointerEvents = "";
+
             this.boundCards();
         },
     },
@@ -167,6 +194,7 @@ export default {
     mounted() {
         window.addEventListener("mouseup", this.mouseupListener);
         window.addEventListener("touchend", this.mouseupListener);
+        // window.addEventListener("mousemove", this.cursorPositions);
     },
 
     unmounted() {
@@ -184,10 +212,6 @@ export default {
     margin-bottom: 14px;
     gap: 20px;
 }
-
-/* h1 {
-    font-size: 30px;
-} */
 
 h1 span {
     cursor: pointer;
@@ -234,43 +258,18 @@ h1 span {
 }
 
 .category-container {
-    /* position: relative; */
     max-width: 1160px;
     overflow-x: hidden;
     margin-bottom: 50px;
-    /* min-height: 340px; */
 }
 
 .category-wrap {
     display: flex;
     gap: 20px;
-    /* position: absolute; */
     top: 0;
     left: 0;
     transform: translateX(0);
 }
-
-/* @media (max-width: 1200px) {
-    h1 {
-        text-align: center;
-    }
-    .category-wrap {
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: center;
-    }
-}
-
-@media (max-width: 900px) {
-    .category-wrap {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 750px) {
-    .category-wrap {
-        grid-template-columns: 1fr;
-    }
-} */
 
 @media (max-width: 660px) {
     .category-container {

@@ -222,7 +222,7 @@ export default {
 
     .product-card-extended-img {
         width: 100%;
-        height: 220px;
+        height: 180px;
     }
 
     .product-card-extended-footer {
